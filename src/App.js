@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Dashboard from './component/Dashboard/Dashboard';
-import Wizard from "./component/Wizard/Wizard";
 import Header from "./component/Header/Header";
+import Router from "./routes";
 import './App.css';
 
 class App extends Component {
@@ -9,8 +8,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header></Header>
-        <Dashboard></Dashboard>
-        <Wizard></Wizard>
+        {Router}
       </div>
     );
   }
