@@ -16,8 +16,9 @@ massive(process.env.CONNECTION_STRING)
     })
     .catch(err => console.log(err));
 
-app.get("/api/houses", controller.getHouses);
-
+app.get("/api/houses", controller.getHouses)
+app.post("/api/home", controller.makeHome)
+app.delete("/api/home/:id", controller.deleteHome)
 
 app.listen(3005, () => {
     console.log("Yep we are Listening on 3005");

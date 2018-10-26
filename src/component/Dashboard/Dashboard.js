@@ -15,6 +15,10 @@ class Dashboard extends Component {
     }
 
     componentDidMount() {
+        this.getAllHomes();
+    }
+
+    getAllHomes = () => {
         axios.get(BASE_URL + '/api/houses')
             .then(response => {
                 //console.log(response.data)
@@ -24,13 +28,22 @@ class Dashboard extends Component {
             })
     }
 
+    handleDeleteHome = (id) => {
+        axios.delete(BASE_URL + `/api/home/${id}`).then(response => {
+            this.getAllHomes()
+        })
+    }
+
     render() {
 
         const housesToRender = this.state.houseList.map((house, index) => {
             //console.log('the id', index)
             return (
                 <div key={index}>
-                    <House houseList={house} />
+                    <House
+                        houseList={house}
+                        deleteHome={this.handleDeleteHome}
+                    />
                 </div>
             )
         })
@@ -42,6 +55,7 @@ class Dashboard extends Component {
                     <button>Add New Prooperty</button>
                 </Link>
                 {housesToRender}
+
             </div>
         )
 

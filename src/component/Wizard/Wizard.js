@@ -2,17 +2,36 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
 
+const BASE_URL = "http://localhost:3005";
+
 class Wizard extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            house: [],
             name: '',
             address: '',
             city: '',
             state: '',
-            zipcode: ''
+            zip: ''
         }
+    }
+
+    handleAddHome = () => {
+        axios
+            .post(BASE_URL + "/api/home", {
+                name: this.state.name,
+                address: this.state.address,
+                city: this.state.city,
+                state: this.state.state,
+                zip: this.state.zip
+            })
+            .then(response => {
+                this.setState({
+                    house: response.data
+                })
+            })
     }
 
     handleNameChange = e => {
@@ -32,7 +51,7 @@ class Wizard extends Component {
     };
 
     handleZipChange = e => {
-        this.setState({ zipcode: e.target.value })
+        this.setState({ zip: e.target.value })
     };
 
     render() {
@@ -52,6 +71,9 @@ class Wizard extends Component {
                 <input onChange={this.handleStateChange}></input>
                 <p>Zip</p>
                 <input onChange={this.handleZipChange}></input>
+                <Link to="/">
+                    <button onClick={this.handleAddHome}>Complete</button>
+                </Link>
             </div>
         )
 
