@@ -2,7 +2,7 @@ import React from "react";
 
 function House(props) {
     const { name, address, city, state, zip, id } = props.houseList;
-    console.log(props)
+    //console.log(props)
     return (
         <div>
             Home Listings
